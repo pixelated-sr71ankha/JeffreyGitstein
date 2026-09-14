@@ -1,0 +1,156 @@
+{
+  "scam_categories": {
+    "upi_fraud": {
+      "name": "UPI Payment Fraud",
+      "severity": "critical",
+      "patterns": [
+        "QR code scam where merchant requests payment instead of receiving",
+        "Fake UPI collect request disguised as refund",
+        "Request to share UPI PIN for 'verification'",
+        "VPA address that looks like official but is impersonation",
+        "Auto-pay mandate fraud through social engineering"
+      ],
+      "red_flags": [
+        "Asking for UPI PIN", "Sharing QR code to receive money",
+        "Fake bank representative calling for OTP",
+        "Urgency to complete transaction immediately",
+        "Requests to install remote access apps"
+      ],
+      "typical_messages": [
+        "Your UPI payment of ₹{amount} has been initiated. Call {number} to cancel.",
+        "Congratulations! You've won ₹{amount}. Share your UPI ID to receive.",
+        "Bank verification needed. Share your UPI PIN to keep account active."
+      ]
+    },
+    "investment_scam": {
+      "name": "Fake Investment Scheme",
+      "severity": "critical",
+      "patterns": [
+        "Guaranteed high returns with no risk promises",
+        "Crypto trading bot that promises daily profits",
+        "Forex trading with guaranteed returns",
+        "Ponzi/pyramid scheme recruitment messages",
+        "Fake IPO allocation or pre-IPO shares"
+      ],
+      "red_flags": [
+        "Guaranteed returns", "Risk-free investment",
+        "Double your money in X days", "Limited time offer",
+        "Join before it's too late", "Refer friends for bonus"
+      ],
+      "typical_messages": [
+        " Invest ₹{amount} and get ₹{amount2} in 24 hours guaranteed!",
+        "Our AI trading bot made ₹{amount} profit yesterday. Join now!",
+        "Last chance to buy pre-IPO shares at 50% discount!"
+      ]
+    },
+    "phishing": {
+      "name": "Bank/Phishing Scam",
+      "severity": "high",
+      "patterns": [
+        "Fake bank SMS asking to verify account",
+        "Email pretending to be from bank with urgent action needed",
+        "Fake KYC update link that steals credentials",
+        "Government tax refund phishing",
+        "Fake insurance policy renewal"
+      ],
+      "red_flags": [
+        "Click this link immediately", "Account will be frozen",
+        "Verify your details within 24 hours", "Suspicious activity detected",
+        "Unofficial email domains", "Poor grammar in official-looking messages"
+      ],
+      "typical_messages": [
+        "Your {bank} account will be deactivated. Click {link} to update KYC immediately.",
+        "Alert: Unauthorized transaction of ₹{amount} from your account. Call {number} to block.",
+        "Income Tax refund of ₹{amount} pending. Claim now at {link}"
+      ]
+    },
+    "otp_fraud": {
+      "name": "OTP/Verification Fraud",
+      "severity": "critical",
+      "patterns": [
+        "Request to share OTP received on phone",
+        "Fake customer care asking for verification code",
+        "Social media account takeover via OTP",
+        "E-commerce order cancellation requiring OTP share"
+      ],
+      "red_flags": [
+        "Share the OTP you just received", "I'll send you a code, please forward it",
+        "OTP verification for account security",
+        "Don't tell anyone about this call"
+      ]
+    },
+    "loan_scam": {
+      "name": "Fake Loan Scam",
+      "severity": "high",
+      "patterns": [
+        "Guaranteed loan approval with no documents",
+        "Loan processing fee required upfront",
+        "Instant loan apps that steal data",
+        "Fake government subsidy schemes"
+      ],
+      "red_flags": [
+        "No documents needed", "Pay processing fee first",
+        "Guaranteed approval", "Install this app for instant loan",
+        "Government scheme - apply now"
+      ]
+    },
+    "job_scam": {
+      "name": "Fake Job/Earning Scam",
+      "severity": "high",
+      "patterns": [
+        "Work from home with unrealistic pay",
+        "Data entry job requiring registration fee",
+        "Part-time job asking for bank details upfront",
+        "Reselling/referral scheme disguised as job"
+      ],
+      "red_flags": [
+        "Earn ₹{amount}/day from home", "Registration fee required",
+        "No experience needed", "WhatsApp group for updates",
+        "Pay to get started"
+      ]
+    },
+    "digital_arrest": {
+      "name": "Digital Arrest Scam",
+      "severity": "critical",
+      "patterns": [
+        "Fake police/CBI officer on video call",
+        "Claims of involvement in money laundering",
+        "Kept on video call for hours under threat",
+        "Asked to transfer money to 'safe account' for verification"
+      ],
+      "red_flags": [
+        "This is CBI/Cybercrime department", "You are under digital arrest",
+        "Don't tell anyone about this investigation", "Transfer money for verification",
+        "Your involvement in money laundering case"
+      ]
+    },
+    "social_engineering": {
+      "name": "Social Engineering/Impersonation",
+      "severity": "high",
+      "patterns": [
+        "Impersonating friend/family in emergency",
+        "Fake customer support on social media",
+        "Romance scam leading to financial requests",
+        "Tech support scam requesting remote access"
+      ],
+      "red_flags": [
+        "I'm in trouble, send money urgently", "Can't use my regular number",
+        "My phone broke, this is my new number", "Need money for medical emergency",
+        "Remote access for tech support"
+      ]
+    }
+  },
+  "safe_indicators": [
+    "Official bank domain email",
+    "No urgent action required",
+    "No request for sensitive information",
+    "Standard transactional message from known sender",
+    "Informational message without call to action"
+  ],
+  "financial_literacy_topics": [
+    "Budgeting", "SIP/Mutual Funds", "Fixed Deposits", "Credit Score",
+    "Tax Planning", "Insurance", "Emergency Fund", "UPI Safety",
+    "Stock Market Basics", "Gold Investment", "PPF/EPF",
+    "Home Loan", "Personal Finance", "Debt Management"
+  ]
+}

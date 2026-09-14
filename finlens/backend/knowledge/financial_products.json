@@ -1,0 +1,156 @@
+{
+  "mutual_fund_categories": {
+    "large_cap": {
+      "name": "Large Cap Equity Funds",
+      "description": "Invest in top 100 companies by market cap. Stable, lower risk among equity funds.",
+      "expected_return": {"conservative": 10, "moderate": 12, "optimistic": 16},
+      "risk_level": "moderate",
+      "min_sip": 500,
+      "recommended_for": ["first_time_investors", "conservative_equity", "3_5_year_goals"],
+      "key_risks": ["market_volatility", "fund_manager_performance"],
+      "tax_treatment": "LTCG 12% above 1.25L, STCG 20%"
+    },
+    "mid_cap": {
+      "name": "Mid Cap Equity Funds",
+      "description": "Invest in companies ranked 101-250 by market cap. Higher growth potential, higher volatility.",
+      "expected_return": {"conservative": 12, "moderate": 15, "optimistic": 22},
+      "risk_level": "high",
+      "min_sip": 500,
+      "recommended_for": ["moderate_risk", "5_7_year_goals", "step_up_sip"],
+      "key_risks": ["high_volatility", "liquidity_risk", "sector_concentration"]
+    },
+    "small_cap": {
+      "name": "Small Cap Equity Funds",
+      "description": "Invest in companies ranked 251+ by market cap. Highest growth potential but very volatile.",
+      "expected_return": {"conservative": 15, "moderate": 18, "optimistic": 30},
+      "risk_level": "very_high",
+      "min_sip": 500,
+      "recommended_for": ["aggressive_investors", "10_plus_year_goals", "experienced"],
+      "key_risks": ["extreme_volatility", "company_failure", "long_recovery_periods"]
+    },
+    "index_fund": {
+      "name": "Index Funds / ETFs",
+      "description": "Passively track market indices like Nifty 50 or Sensex. Lowest cost, market returns.",
+      "expected_return": {"conservative": 10, "moderate": 12, "optimistic": 14},
+      "risk_level": "moderate",
+      "min_sip": 100,
+      "recommended_for": ["everyone", "beginners", "passive_investors", "low_cost_pref"],
+      "key_risks": ["market_risk", "no_downside_protection"],
+      "advantages": ["lowest_fees", "no_fund_manager_risk", "transparent", "tax_efficient"]
+    },
+    "elss": {
+      "name": "ELSS (Tax Saving Funds)",
+      "description": "Equity Linked Savings Scheme. 3-year lock-in. Qualifies for Section 80C deduction up to ₹1.5L.",
+      "expected_return": {"conservative": 10, "moderate": 14, "optimistic": 18},
+      "risk_level": "moderate_high",
+      "min_sip": 500,
+      "lock_in": "3 years (mandatory)",
+      "tax_benefit": "Section 80C deduction up to ₹1.5L",
+      "recommended_for": ["tax_payers", "3_plus_year_horizon", "80c_optimizers"]
+    },
+    "flexi_cap": {
+      "name": "Flexi Cap Funds",
+      "description": "Fund manager can invest across large, mid, and small cap. Flexible allocation.",
+      "expected_return": {"conservative": 11, "moderate": 13, "optimistic": 18},
+      "risk_level": "moderate_high",
+      "min_sip": 500,
+      "recommended_for": ["diversification_pref", "trust_fund_manager", "5_plus_year_goals"]
+    }
+  },
+  "debt_products": {
+    "ppf": {
+      "name": "Public Provident Fund",
+      "current_rate": 7.1,
+      "tenure": "15 years (extendable in 5-year blocks)",
+      "min_investment": 500,
+      "max_investment": 150000,
+      "tax_benefit": "EEE (triple exempt)",
+      "risk_level": "zero",
+      "locking": "Partial withdrawal after 7 years",
+      "recommended_for": ["everyone", "conservative_investors", "tax_savers"]
+    },
+    "nps": {
+      "name": "National Pension System",
+      "expected_return": {"conservative": 8, "moderate": 10, "optimistic": 14},
+      "tenure": "Until age 60",
+      "min_investment": 1000,
+      "tax_benefit": "80CCD(1B) ₹50K additional + 80CCD(1) up to 10% of salary",
+      "risk_level": "moderate",
+      "recommended_for": ["retirement_planners", "tax_optimizers", "long_term"]
+    },
+    "fd": {
+      "name": "Fixed Deposit",
+      "current_rate_range": {"min": 6.5, "max": 7.5},
+      "tenure": "7 days to 10 years",
+      "min_investment": 1000,
+      "risk_level": "zero",
+      "insurance": "DICGC insured up to ₹5L per bank",
+      "tax_treatment": "Interest taxed at income slab rate. 5-year FD qualifies for 80C"
+    },
+    "scss": {
+      "name": "Senior Citizens Savings Scheme",
+      "current_rate": 8.2,
+      "tenure": "5 years (extendable by 3 years)",
+      "min_investment": 1000,
+      "max_investment": 300000,
+      "tax_benefit": "Section 80C deduction",
+      "eligibility": "Age 60+ (or 55+ on retirement)",
+      "recommended_for": ["retirees", "guaranteed_income_seekers"]
+    }
+  },
+  "government_schemes": {
+    "pm_kisan": {
+      "name": "PM Kisan Samman Nidhi",
+      "benefit": "₹6,000/year in 3 installments of ₹2,000 each",
+      "eligibility": "All farmer families with cultivable land",
+      "how_to_apply": "pmkisan.gov.in or nearest CSC center"
+    },
+    "pmjjby": {
+      "name": "Pradhan Mantri Jeevan Jyoti Bima Yojana",
+      "benefit": "₹2 lakh life insurance",
+      "premium": "₹436/year",
+      "eligibility": "Age 18-50, bank account holder"
+    },
+    "pmsby": {
+      "name": "Pradhan Mantri Suraksha Bima Yojana",
+      "benefit": "₹2 lakh accidental death/disability cover",
+      "premium": "₹20/year",
+      "eligibility": "Age 18-70, bank account holder"
+    },
+    "atal_pension": {
+      "name": "Atal Pension Yojana",
+      "benefit": "Guaranteed pension ₹1,000-5,000/month after age 60",
+      "eligibility": "Age 18-40, bank account holder",
+      "contribution": "Depends on age and chosen pension amount"
+    }
+  },
+  "scam_red_flags": {
+    "universal_red_flags": [
+      "Pressure to act immediately",
+      "Requests for OTP, PIN, or password",
+      "Guaranteed high returns",
+      "Requests to transfer money to unknown accounts",
+      "Threats of account closure or legal action",
+      "Asks you to keep it secret",
+      "Too good to be true offers",
+      "Requests for remote access to your device",
+      "Unsolicited prize or lottery wins",
+      "Fake urgency (expires tonight, last chance)"
+    ],
+    "upi_specific_red_flags": [
+      "Someone asks for your UPI PIN",
+      "You receive a collect request from unknown person",
+      "QR code shared in chat (scammers use collect QR)",
+      "Asked to 'approve' a payment you didn't initiate",
+      "UPI ID contains suspicious words (refund, verify, collect)"
+    ],
+    "investment_red_flags": [
+      "Guaranteed returns (no investment is guaranteed)",
+      "Double your money in X days",
+      "Risk-free investment",
+      "AI trading bot that always profits",
+      "Register before midnight for bonus",
+      "Join private Telegram group for tips"
+    ]
+  }
+}

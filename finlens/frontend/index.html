@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinLens — AI Financial Safety Net</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       FinLens Design System — Dark Cybersecurity Theme
+       ═══════════════════════════════════════════════════════════════ */
+
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: rgba(18, 18, 26, 0.8);
+      --bg-glass: rgba(255, 255, 255, 0.03);
+      --border-color: rgba(255, 255, 255, 0.06);
+      --border-glow: rgba(0, 255, 136, 0.15);
+
+      --text-primary: #f0f0f5;
+      --text-secondary: #8888a0;
+      --text-muted: #555570;
+
+      --accent-green: #00ff88;
+      --accent-blue: #00aaff;
+      --accent-purple: #a855f7;
+      --accent-red: #ff3366;
+      --accent-orange: #ff8800;
+      --accent-yellow: #ffcc00;
+
+      --risk-safe: #00ff88;
+      --risk-suspicious: #ffcc00;
+      --risk-dangerous: #ff8800;
+      --risk-scam: #ff3366;
+
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
+
+      --shadow-glow: 0 0 60px rgba(0, 255, 136, 0.05);
+      --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Animated Background ──────────────────────────────────── */
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 255, 136, 0.04), transparent),
+        radial-gradient(circle at 20% 80%, rgba(0, 170, 255, 0.03), transparent),
+        radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.03), transparent);
+    }
+
+    .bg-grid::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* ─── Layout ───────────────────────────────────────────────── */
+    .app { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* ─── Header ───────────────────────────────────────────────── */
+    .header {
+      padding: 20px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(20px);
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10, 10, 15, 0.85);
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
+    }
+
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 900; color: var(--bg-primary);
+    }
+
+    .prism-badge {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 14px;
+      background: var(--bg-glass);
+      border: 1px solid var(--border-color);
+      border-radius: 100px;
+      font-size: 12px; font-weight: 500; color: var(--text-secondary);
+    }
+
+    .prism-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent-green);
+      animation: pulse-dot 2s infinite;
+    }
+
+    .prism-dot.off { background: var(--accent-red); animation: none; }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(0, 255, 136, 0); }
+    }
+
+    /* ─── Hero Section ─────────────────────────────────────────── */
+    .hero {
+      padding: 80px 40px 60px;
+      text-align: center;
+      max-width: 800px; margin: 0 auto;
+    }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 16px;
+      background: rgba(0, 255, 136, 0.08);
+      border: 1px solid rgba(0, 255, 136, 0.15);
+      border-radius: 100px;
+      font-size: 12px; font-weight: 600;
+      color: var(--accent-green);
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 900; letter-spacing: -2px;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px; line-height: 1.6;
+      color: var(--text-secondary);
+      max-width: 600px; margin: 0 auto;
+    }
+
+    /* ─── Stats Bar ────────────────────────────────────────────── */
+    .stats-bar {
+      display: flex; justify-content: center; gap: 48px;
+      padding: 30px 40px;
+      margin: 0 auto 20px;
+      max-width: 700px;
+    }
+
+    .stat { text-align: center; }
+    .stat-value {
+      font-size: 28px; font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .stat-label {
+      font-size: 11px; font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    /* ─── Feature Tabs ─────────────────────────────────────────── */
+    .feature-nav {
+      display: flex; justify-content: center; gap: 4px;
+      padding: 0 40px 40px;
+    }
+
+    .tab-btn {
+      padding: 12px 24px;
+      background: transparent;
+      border: 1px solid var(--border-color);
+      border-radius: 100px;
+      color: var(--text-secondary);
+      font-family: inherit; font-size: 14px; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn:hover {
+      border-color: rgba(0, 255, 136, 0.3);
+      color: var(--text-primary);
+    }
+
+    .tab-btn.active {
+      background: rgba(0, 255, 136, 0.1);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    /* ─── Main Content ─────────────────────────────────────────── */
+    .content {
+      flex: 1;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+    }
+
+    .feature-panel { display: none; }
+    .feature-panel.active { display: block; animation: fadeIn 0.3s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Input Card ───────────────────────────────────────────── */
+    .input-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    .input-card h3 {
+      font-size: 16px; font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .input-card .subtitle {
+      font-size: 13px; color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .input-group { position: relative; }
+
+    textarea, .text-input {
+      width: 100%;
+      min-height: 140px;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px; line-height: 1.6;
+      resize: vertical;
+      transition: border-color 0.3s;
+    }
+
+    textarea:focus, .text-input:focus {
+      outline: none;
+      border-color: var(--accent-green);
+      box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.08);
+    }
+
+    textarea::placeholder { color: var(--text-muted); }
+
+    .btn-row {
+      display: flex; align-items: center; gap: 12px;
+      margin-top: 16px;
+    }
+
+    .analyze-btn {
+      padding: 12px 28px;
+      background: linear-gradient(135deg, var(--accent-green), #00cc6a);
+      border: none; border-radius: 100px;
+      color: var(--bg-primary);
+      font-family: inherit; font-size: 14px; font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .analyze-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
+    }
+
+    .analyze-btn:disabled {
+      opacity: 0.5; cursor: not-allowed;
+      transform: none; box-shadow: none;
+    }
+
+    .analyze-btn.loading { pointer-events: none; }
+
+    .spinner {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(0,0,0,0.2);
+      border-top-color: var(--bg-primary);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      display: none;
+    }
+
+    .analyze-btn.loading .spinner { display: block; }
+    .analyze-btn.loading .btn-text { display: none; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .example-btns {
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+
+    .example-btn {
+      padding: 6px 12px;
+      background: var(--bg-glass);
+      border: 1px solid var(--border-color);
+      border-radius: 100px;
+      color: var(--text-muted);
+      font-family: inherit; font-size: 11px; font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .example-btn:hover {
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+    }
+
+    /* ─── Scam Result Card ─────────────────────────────────────── */
+    .result-card {
+      display: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 24px;
+      animation: slideUp 0.4s ease;
+    }
+
+    .result-card.visible { display: block; }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .risk-header {
+      padding: 28px 32px;
+      display: flex; align-items: center; gap: 24px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .risk-meter {
+      position: relative;
+      width: 100px; height: 100px;
+      flex-shrink: 0;
+    }
+
+    .risk-meter svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+
+    .risk-meter-bg {
+      fill: none;
+      stroke: rgba(255,255,255,0.05);
+      stroke-width: 8;
+    }
+
+    .risk-meter-fill {
+      fill: none;
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 251;
+      stroke-dashoffset: 251;
+      transition: stroke-dashoffset 1.5s ease, stroke 0.5s ease;
+    }
+
+    .risk-meter-value {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-size: 28px; font-weight: 900;
+    }
+
+    .risk-meter-label {
+      font-size: 10px; font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    .risk-info h2 {
+      font-size: 22px; font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .risk-info .verdict { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+
+    .risk-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .badge-safe { background: rgba(0,255,136,0.1); color: var(--risk-safe); }
+    .badge-suspicious { background: rgba(255,204,0,0.1); color: var(--risk-suspicious); }
+    .badge-dangerous { background: rgba(255,136,0,0.1); color: var(--risk-dangerous); }
+    .badge-scam { background: rgba(255,51,102,0.1); color: var(--risk-scam); }
+
+    .result-body {
+      padding: 28px 32px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    }
+
+    .result-section h4 {
+      font-size: 11px; font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .flag-list { list-style: none; }
+    .flag-list li {
+      padding: 8px 0;
+      font-size: 13px; line-height: 1.5;
+      color: var(--text-secondary);
+      display: flex; align-items: flex-start; gap: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .flag-list li:last-child { border: none; }
+    .flag-icon { flex-shrink: 0; font-size: 14px; }
+
+    .action-box {
+      padding: 16px;
+      background: rgba(0, 255, 136, 0.04);
+      border: 1px solid rgba(0, 255, 136, 0.1);
+      border-radius: var(--radius-sm);
+      font-size: 13px; line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .edu-box {
+      padding: 16px;
+      background: rgba(0, 170, 255, 0.04);
+      border: 1px solid rgba(0, 170, 255, 0.1);
+      border-radius: var(--radius-sm);
+      font-size: 13px; line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    /* ─── Finance Health Result ─────────────────────────────────── */
+    .health-result {
+      display: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 24px;
+      animation: slideUp 0.4s ease;
+    }
+
+    .health-result.visible { display: block; }
+
+    .grade-header {
+      padding: 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .grade-circle {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px; font-weight: 900;
+      border: 3px solid;
+    }
+
+    .grade-a { border-color: var(--risk-safe); color: var(--risk-safe); background: rgba(0,255,136,0.05); }
+    .grade-b { border-color: var(--accent-blue); color: var(--accent-blue); background: rgba(0,170,255,0.05); }
+    .grade-c { border-color: var(--risk-suspicious); color: var(--risk-suspicious); background: rgba(255,204,0,0.05); }
+    .grade-d { border-color: var(--risk-dangerous); color: var(--risk-dangerous); background: rgba(255,136,0,0.05); }
+    .grade-f { border-color: var(--risk-scam); color: var(--risk-scam); background: rgba(255,51,102,0.05); }
+
+    .health-body {
+      padding: 32px;
+    }
+
+    .health-section {
+      margin-bottom: 24px;
+    }
+
+    .health-section h4 {
+      font-size: 11px; font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .tip-list {
+      list-style: none;
+    }
+
+    .tip-list li {
+      padding: 10px 14px;
+      margin-bottom: 6px;
+      background: var(--bg-glass);
+      border-radius: var(--radius-xs);
+      font-size: 13px; line-height: 1.5;
+      color: var(--text-secondary);
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+
+    .tip-icon { flex-shrink: 0; }
+
+    /* ─── Q&A Result ───────────────────────────────────────────── */
+    .qa-result {
+      display: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 24px;
+      animation: slideUp 0.4s ease;
+    }
+
+    .qa-result.visible { display: block; }
+
+    .qa-body {
+      padding: 32px;
+    }
+
+    .qa-response {
+      font-size: 14px; line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .qa-response strong { color: var(--text-primary); }
+
+    .qa-meta {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-top: 20px; padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .qa-tag {
+      padding: 4px 12px;
+      background: var(--bg-glass);
+      border: 1px solid var(--border-color);
+      border-radius: 100px;
+      font-size: 11px; font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .qa-disclaimer {
+      margin-top: 20px;
+      padding: 14px;
+      background: rgba(168, 85, 247, 0.04);
+      border: 1px solid rgba(168, 85, 247, 0.1);
+      border-radius: var(--radius-sm);
+      font-size: 11px; color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ─── Scan Animation Overlay ───────────────────────────────── */
+    .scan-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(10, 10, 15, 0.9);
+      z-index: 200;
+      align-items: center; justify-content: center;
+      flex-direction: column; gap: 24px;
+    }
+
+    .scan-overlay.active { display: flex; }
+
+    .scan-ring {
+      width: 120px; height: 120px;
+      border: 3px solid transparent;
+      border-top-color: var(--accent-green);
+      border-right-color: var(--accent-blue);
+      border-radius: 50%;
+      animation: scanSpin 1.2s linear infinite;
+    }
+
+    @keyframes scanSpin { to { transform: rotate(360deg); } }
+
+    .scan-text {
+      font-size: 14px; font-weight: 600;
+      color: var(--accent-green);
+      text-transform: uppercase; letter-spacing: 2px;
+    }
+
+    .scan-subtext {
+      font-size: 12px; color: var(--text-muted);
+    }
+
+    /* ─── Footer ───────────────────────────────────────────────── */
+    .footer {
+      padding: 24px 40px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      font-size: 12px; color: var(--text-muted);
+    }
+
+    .footer a { color: var(--accent-green); text-decoration: none; }
+
+    /* ─── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .header { padding: 16px 20px; }
+      .hero { padding: 50px 20px 40px; }
+      .content { padding: 0 20px 60px; }
+      .input-card { padding: 24px; }
+      .result-body { grid-template-columns: 1fr; }
+      .stats-bar { gap: 24px; }
+      .risk-header { flex-direction: column; text-align: center; }
+      .grade-header { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <div class="app">
+    <!-- ═══ Header ═══ -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">F</div>
+        <span>FinLens</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div class="prism-badge" id="geminiStatus">
+          <div class="prism-dot off" id="geminiDot"></div>
+          <span>Gemini live</span>
+        </div>
+        <div class="prism-badge" id="prismStatus">
+          <div class="prism-dot" id="prismDot"></div>
+          <span>PRISM by Block Convey</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ═══ Scan Overlay ═══ -->
+    <div class="scan-overlay" id="scanOverlay">
+      <div class="scan-ring"></div>
+      <div class="scan-text">Analyzing Threat Vector</div>
+      <div class="scan-subtext">PRISM is observing this interaction...</div>
+    </div>
+
+    <!-- ═══ Hero ═══ -->
+    <section class="hero">
+      <div class="hero-tag">🛡️ AI for Finance — ForgeAI Hackathon</div>
+      <h1>Financial Safety.<br>Demystified.</h1>
+      <p>Paste a suspicious message. Check your financial health. Learn about money. One AI, three shields against India's ₹10,000 crore scam epidemic.</p>
+    </section>
+
+    <!-- ═══ Stats ═══ -->
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-value" id="statScans">0</div>
+        <div class="stat-label">Scans Today</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="statScams">8</div>
+        <div class="stat-label">Scam Types</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="statPrism">—</div>
+        <div class="stat-label">PRISM Traces</div>
+      </div>
+    </div>
+
+    <!-- ═══ Feature Tabs ═══ -->
+    <nav class="feature-nav">
+      <button class="tab-btn active" data-tab="scam">🔍 Scam Analyzer</button>
+      <button class="tab-btn" data-tab="health">📊 Financial Health</button>
+      <button class="tab-btn" data-tab="learn">🧠 Learn Finance</button>
+    </nav>
+
+    <!-- ═══ Content ═══ -->
+    <main class="content">
+
+      <!-- ─── Scam Analyzer Panel ─── -->
+      <div class="feature-panel active" id="panel-scam">
+        <div class="input-card">
+          <h3>Paste Suspicious Message</h3>
+          <p class="subtitle">WhatsApp forwards, SMS, emails, investment offers — we'll tell you if it's legit.</p>
+          <div class="input-group">
+            <textarea id="scamInput" placeholder="Paste the suspicious message here...&#10;&#10;Example: 'Congratulations! You've won ₹5,00,000 in the Lucky Draw. Click the link to claim your prize now!'" rows="5"></textarea>
+          </div>
+          <div class="btn-row">
+            <button class="analyze-btn" id="analyzeScam" onclick="analyzeScam()">
+              <div class="spinner"></div>
+              <span class="btn-text">🔍 Analyze for Scams</span>
+            </button>
+            <div class="example-btns">
+              <button class="example-btn" onclick="loadExample('scam', 'upi')">UPI Scam</button>
+              <button class="example-btn" onclick="loadExample('scam', 'investment')">Fake Investment</button>
+              <button class="example-btn" onclick="loadExample('scam', 'phishing')">Phishing SMS</button>
+              <button class="example-btn" onclick="loadExample('scam', 'otp')">OTP Fraud</button>
+              <button class="example-btn" onclick="loadExample('scam', 'job')">Job Scam</button>
+            </div>
+          </div>
+        </div>
+        <div class="result-card" id="scamResult"></div>
+      </div>
+
+      <!-- ─── Financial Health Panel ─── -->
+      <div class="feature-panel" id="panel-health">
+        <div class="input-card">
+          <h3>Describe Your Finances</h3>
+          <p class="subtitle">Share your monthly income and expenses in any format — we'll give you a health grade.</p>
+          <div class="input-group">
+            <textarea id="healthInput" placeholder="Example: I'm 24, earning ₹45,000/month after tax. Rent is ₹12,000, food ₹6,000, transport ₹3,000, phone/internet ₹1,500. I have a ₹5,000 SIP in an equity fund and about ₹1,50,000 in savings. No loans." rows="5"></textarea>
+          </div>
+          <div class="btn-row">
+            <button class="analyze-btn" id="analyzeHealth" onclick="analyzeHealth()">
+              <div class="spinner"></div>
+              <span class="btn-text">📊 Check My Health</span>
+            </button>
+            <div class="example-btns">
+              <button class="example-btn" onclick="loadExample('health', 'student')">Student</button>
+              <button class="example-btn" onclick="loadExample('health', 'fresh')">Fresher</button>
+              <button class="example-btn" onclick="loadExample('health', 'mid')">Mid-Career</button>
+            </div>
+          </div>
+        </div>
+        <div class="health-result" id="healthResult"></div>
+      </div>
+
+      <!-- ─── Financial Literacy Panel ─── -->
+      <div class="feature-panel" id="panel-learn">
+        <div class="input-card">
+          <h3>Ask Anything About Money</h3>
+          <p class="subtitle">SIP, mutual funds, tax saving, credit score, budgeting — no question is too basic.</p>
+          <div class="input-group">
+            <input type="text" class="text-input" id="learnInput" placeholder="e.g., How do I start investing with ₹5,000 per month?" onkeydown="if(event.key==='Enter')askQuestion()" style="min-height: auto; height: 56px; padding: 16px;">
+          </div>
+          <div class="btn-row">
+            <button class="analyze-btn" id="askBtn" onclick="askQuestion()">
+              <div class="spinner"></div>
+              <span class="btn-text">🧠 Ask FinLens</span>
+            </button>
+            <div class="example-btns">
+              <button class="example-btn" onclick="loadExample('learn', 'sip')">Start SIP</button>
+              <button class="example-btn" onclick="loadExample('learn', 'tax')">Tax Saving</button>
+              <button class="example-btn" onclick="loadExample('learn', 'credit')">Credit Score</button>
+              <button class="example-btn" onclick="loadExample('learn', 'budget')">Budgeting</button>
+            </div>
+          </div>
+        </div>
+        <div class="qa-result" id="learnResult"></div>
+      </div>
+
+    </main>
+
+    <!-- ═══ Footer ═══ -->
+    <footer class="footer">
+      Built for ForgeAI Hackathon @ graVITas'26 &nbsp;·&nbsp; Live on Google Gemini &nbsp;·&nbsp; Observed by <a href="#">PRISM by Block Convey</a>
+    </footer>
+  </div>
+
+  <script>
+    /* ═══════════════════════════════════════════════════════════════
+       FinLens Frontend Logic
+       ═══════════════════════════════════════════════════════════════ */
+
+    const API_BASE = window.location.origin;
+    let scanCount = 0;
+    let prismTraces = 0;
+    let currentSessionId = null;
+
+    // ─── Fetch Dynamic Stats ────────────────────────────────────
+    async function fetchStats() {
+      try {
+        const resp = await fetch(API_BASE + '/api/stats');
+        const data = await resp.json();
+        document.getElementById('statScans').textContent = data.total_scans || 0;
+        document.getElementById('statScams').textContent = data.scam_types_count || 0;
+        document.getElementById('statPrism').textContent = data.prism_traces || 0;
+        scanCount = data.total_scans || 0;
+        prismTraces = data.prism_traces || 0;
+      } catch (e) { /* stats unavailable, use local counters */ }
+    }
+
+    // Load stats on page load
+    fetchStats();
+
+    // ─── Tab Navigation ──────────────────────────────────────────
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.feature-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // ─── PRISM Status Check ──────────────────────────────────────
+    async function checkPrism() {
+      try {
+        const resp = await fetch(API_BASE + '/api/health');
+        const data = await resp.json();
+        const geminiDot = document.getElementById('geminiDot');
+        const prismDot = document.getElementById('prismDot');
+        if (data.gemini_configured) geminiDot.classList.remove('off');
+        else geminiDot.classList.add('off');
+        if (data.prism_connected) prismDot.classList.remove('off');
+        else prismDot.classList.add('off');
+      } catch(e) {
+        document.getElementById('geminiDot').classList.add('off');
+        document.getElementById('prismDot').classList.add('off');
+      }
+    }
+    checkPrism();
+
+    // ─── Example Messages ────────────────────────────────────────
+    const EXAMPLES = {
+      scam: {
+        upi: "Congratulations! You have been selected for a cashback of ₹15,000 on your UPI transaction. To claim, please share your UPI PIN for verification. Offer valid for next 30 minutes only!",
+        investment: "🚀 Our AI Trading Bot generated ₹2,84,000 profit for our members yesterday! Join our Telegram group now. Invest ₹10,000 minimum. Guaranteed 3% daily returns. Risk-free! Limited spots remaining. DM me to join before midnight!",
+        phishing: "Dear Customer, Your HDFC Bank account will be suspended due to incomplete KYC verification. Click here to update: hdfc-verify-kyc.in/secure/update. You must complete this within 24 hours or your account will be permanently blocked.",
+        otp: "Hi, this is SBI Customer Care. We noticed a suspicious transaction of ₹49,999 on your account. To block this transaction immediately, please share the OTP we just sent to your phone. Do not share this with anyone else.",
+        job: "Work From Home - Earn ₹35,000/day! 🤑 No experience needed. Just 2 hours of work on your phone. Data entry & form filling. Registration fee: ₹999 (refundable). WhatsApp us your name to start immediately!"
+      },
+      health: {
+        student: "I'm a 21-year-old college student. I get ₹8,000/month pocket money. I spend about ₹3,000 on food outside, ₹1,500 on transportation, ₹1,000 on subscriptions (Netflix, Spotify), and ₹1,500 on shopping. I have ₹12,000 saved in a savings account. No income from work.",
+        fresh: "I'm 23, just started working. Salary ₹35,000/month in-hand. Rent ₹10,000, groceries ₹4,000, commute ₹2,500, phone bill ₹799, eating out ₹4,000, shopping ₹3,000. I have ₹50,000 in savings and a education loan of ₹3,00,000 at 9% interest. No investments yet.",
+        mid: "I'm 30, earning ₹1,20,000/month in-hand. EMI for home loan ₹35,000, car loan ₹12,000. Wife doesn't work. Child's school fees ₹8,000. Household expenses ₹20,000. I have ₹3,00,000 in FDs, ₹5,00,000 in mutual funds (SIP of ₹15,000), and ₹2,00,000 in emergency fund. I spend about ₹10,000 on dining and entertainment."
+      },
+      learn: {
+        sip: "How do I start investing with ₹5,000 per month? I'm completely new to mutual funds.",
+        tax: "What are the best tax-saving options under Section 80C for a salaried person earning ₹10 LPA? Old regime vs new regime?",
+        credit: "What is a credit score and how can I improve it? My CIBIL score is around 680.",
+        budget: "What is the 50/30/20 budgeting rule and how do I adapt it for Indian expenses?"
+      }
+    };
+
+    function loadExample(category, type) {
+      const examples = EXAMPLES[category];
+      if (!examples || !examples[type]) return;
+
+      if (category === 'scam') {
+        document.getElementById('scamInput').value = examples[type];
+      } else if (category === 'health') {
+        document.getElementById('healthInput').value = examples[type];
+      } else if (category === 'learn') {
+        document.getElementById('learnInput').value = examples[type];
+      }
+    }
+
+    // ─── Scan Animation ──────────────────────────────────────────
+    function showScan() {
+      document.getElementById('scanOverlay').classList.add('active');
+    }
+
+    function hideScan() {
+      document.getElementById('scanOverlay').classList.remove('active');
+    }
+
+    // ─── Scam Analyzer ───────────────────────────────────────────
+    async function analyzeScam() {
+      const input = document.getElementById('scamInput').value.trim();
+      if (!input) return;
+
+      const btn = document.getElementById('analyzeScam');
+      btn.classList.add('loading');
+      showScan();
+
+      try {
+        const resp = await fetch(API_BASE + '/api/analyze-scam', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: input, session_id: currentSessionId }),
+        });
+
+        const data = await resp.json();
+        if (!resp.ok || !data.success) {
+          throw new Error(data.detail || 'Analysis failed. Please try again.');
+        }
+        currentSessionId = data.session_id;
+        renderScamResult(data.data);
+        fetchStats();
+      } catch (e) {
+        console.error('Scam analysis error:', e);
+        alert(e.message || 'Network error. Is the backend running?');
+      } finally {
+        btn.classList.remove('loading');
+        hideScan();
+      }
+    }
+
+    function renderScamResult(result) {
+      const el = document.getElementById('scamResult');
+      const risk = (result.risk_level || 'SUSPICIOUS').toUpperCase();
+
+      const riskColors = {
+        'SAFE': 'var(--risk-safe)',
+        'SUSPICIOUS': 'var(--risk-suspicious)',
+        'DANGEROUS': 'var(--risk-dangerous)',
+        'CONFIRMED_SCAM': 'var(--risk-scam)',
+        'CONFIRMED_SCAM': 'var(--risk-scam)'
+      };
+
+      const badgeClass = {
+        'SAFE': 'badge-safe',
+        'SUSPICIOUS': 'badge-suspicious',
+        'DANGEROUS': 'badge-dangerous',
+        'CONFIRMED_SCAM': 'badge-scam'
+      };
+
+      const score = result.risk_score || 50;
+      const color = riskColors[risk] || 'var(--risk-suspicious)';
+      const dashOffset = 251 - (251 * score / 100);
+
+      const redFlags = (result.red_flags || []).map(f =>
+        `<li><span class="flag-icon">🚩</span>${escHtml(f)}</li>`
+      ).join('');
+
+      const safeFlags = (result.safe_indicators || []).map(f =>
+        `<li><span class="flag-icon">✅</span>${escHtml(f)}</li>`
+      ).join('');
+
+      el.innerHTML = `
+        <div class="risk-header">
+          <div class="risk-meter">
+            <svg viewBox="0 0 100 100">
+              <circle class="risk-meter-bg" cx="50" cy="50" r="40"/>
+              <circle class="risk-meter-fill" cx="50" cy="50" r="40"
+                style="stroke: ${color}; stroke-dashoffset: ${dashOffset};"/>
+            </svg>
+            <div class="risk-meter-value" style="color: ${color};">
+              ${score}
+              <div class="risk-meter-label">Risk</div>
+            </div>
+          </div>
+          <div class="risk-info">
+            <span class="risk-badge ${badgeClass[risk] || 'badge-suspicious'}">${risk.replace('_', ' ')}</span>
+            <h2>${escHtml(result.verdict || 'Analysis Complete')}</h2>
+            <p class="verdict">${escHtml(result.explanation || '')}</p>
+          </div>
+        </div>
+        <div class="result-body">
+          <div class="result-section">
+            <h4>🚩 Red Flags Detected (${(result.red_flags || []).length})</h4>
+            <ul class="flag-list">
+              ${redFlags || '<li>No red flags detected</li>'}
+              ${safeFlags}
+            </ul>
+          </div>
+          <div class="result-section">
+            <h4>📋 Recommended Action</h4>
+            <div class="action-box">
+              <strong>What you should do:</strong><br>
+              ${escHtml(result.action || 'Exercise caution with this message.')}
+            </div>
+            <div class="edu-box" style="margin-top: 12px;">
+              <strong>💡 Learn:</strong><br>
+              ${escHtml(result.educational_note || 'Always verify through official channels.')}
+            </div>
+            <div style="margin-top: 12px; font-size: 11px; color: var(--text-muted);">
+              Scam Type: ${escHtml(result.scam_type || 'Various')} &nbsp;·&nbsp; Confidence: ${result.confidence || 0}%
+            </div>
+          </div>
+        </div>
+      `;
+
+      el.classList.add('visible');
+
+      // Animate the meter after render
+      requestAnimationFrame(() => {
+        const fill = el.querySelector('.risk-meter-fill');
+        if (fill) {
+          fill.style.strokeDashoffset = 251; // start from 0
+          requestAnimationFrame(() => {
+            fill.style.strokeDashoffset = dashOffset;
+          });
+        }
+      });
+    }
+
+    // ─── Financial Health ────────────────────────────────────────
+    async function analyzeHealth() {
+      const input = document.getElementById('healthInput').value.trim();
+      if (!input) return;
+
+      const btn = document.getElementById('analyzeHealth');
+      btn.classList.add('loading');
+      showScan();
+
+      try {
+        const resp = await fetch(API_BASE + '/api/finance-health', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ profile: input, session_id: currentSessionId }),
+        });
+
+        const data = await resp.json();
+        if (!resp.ok || !data.success) {
+          throw new Error(data.detail || 'Health check failed. Please try again.');
+        }
+        currentSessionId = data.session_id;
+        renderHealthResult(data.data);
+        fetchStats();
+      } catch (e) {
+        console.error('Health check error:', e);
+        alert(e.message || 'Network error. Is the backend running?');
+      } finally {
+        btn.classList.remove('loading');
+        hideScan();
+      }
+    }
+
+    function renderHealthResult(result) {
+      const el = document.getElementById('healthResult');
+      const grade = (result.health_grade || 'B').toUpperCase();
+      const score = result.health_score || 50;
+
+      let gradeClass = 'grade-b';
+      if (grade.startsWith('A')) gradeClass = 'grade-a';
+      else if (grade.startsWith('C')) gradeClass = 'grade-c';
+      else if (grade.startsWith('D')) gradeClass = 'grade-d';
+      else if (grade === 'F') gradeClass = 'grade-f';
+
+      const strengths = (result.strengths || []).map(s =>
+        `<li><span class="tip-icon">💪</span>${escHtml(s)}</li>`
+      ).join('');
+
+      const improvements = (result.areas_to_improve || []).map(s =>
+        `<li><span class="tip-icon">📈</span>${escHtml(s)}</li>`
+      ).join('');
+
+      const suggestions = (result.budget_recommendation?.specific_suggestions || []).map(s =>
+        `<li><span class="tip-icon">💡</span>${escHtml(s)}</li>`
+      ).join('');
+
+      const taxTips = (result.tax_saving_tips || []).map(s =>
+        `<li><span class="tip-icon">🏦</span>${escHtml(s)}</li>`
+      ).join('');
+
+      el.innerHTML = `
+        <div class="grade-header">
+          <div class="grade-circle ${gradeClass}">${grade}</div>
+          <div style="text-align: left;">
+            <span style="font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Health Score</span>
+            <div style="font-size: 32px; font-weight: 900;">${score}/100</div>
+            <div style="font-size: 14px; color: var(--text-secondary);">${escHtml(result.verdict || '')}</div>
+          </div>
+        </div>
+        <div class="health-body">
+          ${result.breakdown ? `
+          <div class="health-section">
+            <h4>📊 Spending Breakdown</h4>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+              <div style="padding: 14px; background: var(--bg-glass); border-radius: var(--radius-xs); text-align: center;">
+                <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Essential</div>
+                <div style="font-size: 15px; font-weight: 700; margin-top: 4px;">${escHtml(String(result.breakdown.essential || '—'))}</div>
+              </div>
+              <div style="padding: 14px; background: var(--bg-glass); border-radius: var(--radius-xs); text-align: center;">
+                <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Discretionary</div>
+                <div style="font-size: 15px; font-weight: 700; margin-top: 4px;">${escHtml(String(result.breakdown.discretionary || '—'))}</div>
+              </div>
+              <div style="padding: 14px; background: var(--bg-glass); border-radius: var(--radius-xs); text-align: center;">
+                <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Savings</div>
+                <div style="font-size: 15px; font-weight: 700; margin-top: 4px;">${escHtml(String(result.breakdown.savings_investment || '—'))}</div>
+              </div>
+            </div>
+          </div>` : ''}
+          ${strengths ? `<div class="health-section"><h4>Strengths</h4><ul class="tip-list">${strengths}</ul></div>` : ''}
+          ${improvements ? `<div class="health-section"><h4>Areas to Improve</h4><ul class="tip-list">${improvements}</ul></div>` : ''}
+          ${suggestions ? `<div class="health-section"><h4>Budget Recommendations</h4><ul class="tip-list">${suggestions}</ul></div>` : ''}
+          ${result.investment_suggestion ? `<div class="health-section"><h4>Investment Suggestion</h4><div class="action-box">${escHtml(result.investment_suggestion)}</div></div>` : ''}
+          ${taxTips ? `<div class="health-section"><h4>Tax Saving Tips</h4><ul class="tip-list">${taxTips}</ul></div>` : ''}
+          ${result.emergency_fund_status ? `<div class="health-section"><h4>Emergency Fund</h4><div class="edu-box">${escHtml(result.emergency_fund_status)}</div></div>` : ''}
+        </div>
+      `;
+
+      el.classList.add('visible');
+    }
+
+    // ─── Financial Literacy Q&A ──────────────────────────────────
+    async function askQuestion() {
+      const input = document.getElementById('learnInput').value.trim();
+      if (!input) return;
+
+      const btn = document.getElementById('askBtn');
+      btn.classList.add('loading');
+
+      try {
+        const resp = await fetch(API_BASE + '/api/financial-qa', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question: input, session_id: currentSessionId }),
+        });
+
+        const data = await resp.json();
+        if (!resp.ok || !data.success) {
+          throw new Error(data.detail || 'Question failed. Please try again.');
+        }
+        currentSessionId = data.session_id;
+        renderQAResult(data.data);
+        fetchStats();
+      } catch (e) {
+        console.error('QA error:', e);
+        alert(e.message || 'Network error. Is the backend running?');
+      } finally {
+        btn.classList.remove('loading');
+      }
+    }
+
+    function renderQAResult(result) {
+      const el = document.getElementById('learnResult');
+
+      const takeaways = (result.key_takeaways || []).map(t =>
+        `<li><span class="tip-icon">✅</span>${escHtml(t)}</li>`
+      ).join('');
+
+      const related = (result.related_topics || []).map(t =>
+        `<span class="qa-tag">${escHtml(t)}</span>`
+      ).join('');
+
+      // Simple markdown-like rendering
+      let response = escHtml(result.response || '');
+      response = response.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      response = response.replace(/\n/g, '<br>');
+
+      el.innerHTML = `
+        <div class="qa-body">
+          <div class="qa-response">${response}</div>
+          ${takeaways ? `<div class="health-section" style="margin-top: 20px;"><h4>Key Takeaways</h4><ul class="tip-list">${takeaways}</ul></div>` : ''}
+          <div class="qa-meta">
+            <span class="qa-tag">📚 ${escHtml(result.topic || 'Finance')}</span>
+            <span class="qa-tag">📊 Level: ${escHtml(result.difficulty_level || 'beginner')}</span>
+            <span class="qa-tag">🎯 Confidence: ${result.confidence || 80}%</span>
+          </div>
+          ${related ? `<div style="margin-top: 12px;"><span style="font-size: 11px; color: var(--text-muted);">Related: </span>${related}</div>` : ''}
+          <div class="qa-disclaimer">
+            ⚠️ ${escHtml(result.disclaimer || 'This is educational information, not personalized financial advice.')}
+          </div>
+        </div>
+      `;
+
+      el.classList.add('visible');
+    }
+
+    // ─── Utility ─────────────────────────────────────────────────
+    function escHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>
